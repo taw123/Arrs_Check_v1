@@ -5,7 +5,8 @@
 FROM alpine:latest
  
 # Install SQLite and for ease of docker inspection add Bash (since Alpine only includes 'ash’), and nano for editing scripts, cron to schedule repeat runs, and cURL for Bash based Pushover Notification script to call from MY ACTUAL scripts
-RUN apk update && apk upgrade && apk add sqlite && apk add --no-cache bash && apk add --no-cache nano && apk --no-cache && apk add --no-cache cron
+#RUN apk update && apk upgrade && apk add sqlite && apk add --no-cache bash && apk add --no-cache nano && apk --no-cache && apk add --no-cache cron
+RUN apk update && apk upgrade && apk add --no-cache sqlite bash nano curl cron
  
 # Set the default working directory
 WORKDIR /db
@@ -15,6 +16,14 @@ WORKDIR /db
 #CMD ["tail", "-f", "/dev/null"]  # Keeps the container running
 #ENTRYPOINT ["/scripts/test.sh Sonarr"]
 
+
+# Copy script and cron job
+COPY container_cronjob /etc/cron.d/container_cronjob
+COPY log_message.sh /log_message.sh
+
+# Set permissions
+RUN chmod +x /log_message.sh
+RUN chmod 0644 /etc/cron.d/container_cronjob
 
 # Start cron in foreground & keep container alive
 CMD cron -f
