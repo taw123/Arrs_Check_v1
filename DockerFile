@@ -9,4 +9,5 @@ WORKDIR /db
  
 # Set the default command to open SQLite (was CMD ["sqlite3”]) but I removed that and put in placeholder to keep open ?
 #CMD ["sqlite3"]
-CMD ["tail", "-f", "/dev/null"]  # Keeps the container running
+#CMD ["tail", "-f", "/dev/null"]  # Keeps the container running
+ENTRYPOINT ["/scripts/test.sh Sonarr"]
