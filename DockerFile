@@ -3,8 +3,8 @@
 # Start with a lightweight base image
 FROM alpine:latest
  
-# Install SQLite and for ease of docker inspection add Bash (since Alpine only includes 'ash’), and nano for editing scripts, and cURL for Bash based Pushover Notification script to call from MY ACTUAL scripts
-RUN apk update && apk upgrade && apk add sqlite && apk add --no-cache bash && apk add --no-cache nano && apk --no-cache add curl
+# Install SQLite and for ease of docker inspection add Bash (since Alpine only includes 'ash’), and nano for editing scripts, cron to schedule repeat runs, and cURL for Bash based Pushover Notification script to call from MY ACTUAL scripts
+RUN apk update && apk upgrade && apk add sqlite && apk add --no-cache bash && apk add --no-cache nano && apk --no-cache && apk add --no-cache cron
  
 # Set the default working directory
 WORKDIR /db
