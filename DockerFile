@@ -25,6 +25,13 @@ COPY log_message.sh /log_message.sh
 #RUN echo '38       */4       *       *       *       /scripts/arrs_log_check_dispatcher' >> /etc/crontabs/root        # *PROD* - Run every 4 hrs at 38 min past the hour
 RUN echo '*       *       *       *       *       /scripts/arrs_log_check_dispatcher' >> /etc/crontabs/root           # ** -test- ** - Run every min for rapid testing (still needs to be named file with no .sh??)
 
+# Other option for cron scheduling is to bind mount overide the built in periodic locations with persistent storage under MY control in Docker Compose per bellow:
+#command: /usr/local/startup.sh && crond -f -l 8
+#    volumes:
+#      - ./cron_tasks_folder/15min:/etc/periodic/15min/:ro
+#      - ./cron_tasks_folder/hourly:/etc/periodic/hourly/:ro
+#      - ./cron_tasks_folder/1min:/etc/periodic/1min/:ro
+#      - ./scripts/startup.sh:/usr/local/startup.sh:ro
 
 
 # Set permissions
