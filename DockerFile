@@ -20,9 +20,11 @@ WORKDIR /db
 # Copy script and cron job
 # COPY container_cronjob /var/spool/cron/crontabs/container_cronjob
 COPY log_message.sh /log_message.sh
-#RUN echo '*/5 * * * *    /scripts/test.sh' > /etc/crontabs/root  
-#RUN echo '*       *       *       *       *       echo "From cron-Hello-NEW"' >> /etc/crontabs/root        #for testing run every 5 min (the pseudo crond required all in 1 file?
-RUN echo '38       */4       *       *       *       /scripts/arrs_log_check_dispatcher' >> /etc/crontabs/root        # Run every 4 hrs at 38 min past the hour
+#RUN echo '*/5 * * * *    /scripts/test.sh' > /etc/crontabs/root  # Don't use as this will wipe out the current periodic cron jobs in alpine image
+#RUN echo '*       *       *       *       *       echo "From cron-Hello-NEW"' >> /etc/crontabs/root   #for testing run every 5 min (the pseudo crond required all in 1 file?
+#RUN echo '38       */4       *       *       *       /scripts/arrs_log_check_dispatcher' >> /etc/crontabs/root        # *PROD* - Run every 4 hrs at 38 min past the hour
+RUN echo '*       *       *       *       *       /scripts/arrs_log_check_dispatcher' >> /etc/crontabs/root           # ** -test- ** - Run every min for rapid testing (still needs to be named file with no .sh??)
+
 
 
 # Set permissions
