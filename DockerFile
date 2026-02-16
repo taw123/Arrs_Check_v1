@@ -40,4 +40,4 @@ RUN echo '*       *       *       *       *       /scripts/arrs_log_check_dispat
 
 # Start cron in foreground & keep container alive
 # CMD cron -f -l 2
-CMD /usr/sbin/crond -fbS -l 2 -d 0 -L /var/log/cron.log
+CMD /usr/sbin/crond -fbS -l 2 -d 0 -L /var/log/cron.log && tail -f /var/log/SimpleEcho.log
