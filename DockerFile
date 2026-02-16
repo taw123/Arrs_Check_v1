@@ -35,8 +35,8 @@ RUN echo '*       *       *       *       *       /scripts/arrs_log_check_dispat
 
 
 # Set permissions
-RUN chmod +x /log_message.sh
-RUN chmod 0644 /var/spool/cron/crontabs/container_cronjob
+#RUN chmod +x /log_message.sh
+#RUN chmod 0644 /var/spool/cron/crontabs/container_cronjob
 
 # Start cron in foreground & keep container alive
 # CMD cron -f -l 2
